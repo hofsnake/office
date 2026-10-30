@@ -1,0 +1,8 @@
+node_modules
+dist
+dist-pages
+data
+server.log
+server.pid
+cloudflared
+tunnel.log

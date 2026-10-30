@@ -1,0 +1,20 @@
+{
+  "departments": ["Executive", "Finance & Health", "Business", "Food", "Trading", "Family", "Home", "Media", "Lounge Advisors"],
+  "bots": [
+    {"slug": "chief-of-staff", "name": "Chief of Staff", "short": "Chief", "color": "#e8761a", "colorName": "orange", "dept": "Executive", "accessory": "clipboard", "lead": true},
+    {"slug": "med-bills", "name": "Med Bills", "short": "Med", "color": "#c62d2d", "colorName": "red", "dept": "Finance & Health", "accessory": "calculator"},
+    {"slug": "health", "name": "Health", "short": "Health", "color": "#2e9e4f", "colorName": "green", "dept": "Finance & Health", "accessory": "stethoscope"},
+    {"slug": "biz", "name": "Biz", "short": "Biz", "color": "#1c2f6b", "colorName": "navy", "dept": "Business", "accessory": "briefcase"},
+    {"slug": "pe-reviewer", "name": "PE Reviewer", "short": "PE", "color": "#8cc63f", "colorName": "lime", "dept": "Business", "accessory": "whistle"},
+    {"slug": "san-angelo-eats", "name": "San Angelo Eats", "short": "Eats", "color": "#1b9a96", "colorName": "teal", "dept": "Food", "accessory": "map pin"},
+    {"slug": "foodie", "name": "Foodie", "short": "Foodie", "color": "#e56fa6", "colorName": "pink", "dept": "Food", "accessory": "chef hat"},
+    {"slug": "trader", "name": "Trader", "short": "Trader", "color": "#7a3fc4", "colorName": "violet", "dept": "Trading", "accessory": "ticker"},
+    {"slug": "day-trade", "name": "Day Trade", "short": "Day", "color": "#28b4d6", "colorName": "cyan", "dept": "Trading", "accessory": "stopwatch"},
+    {"slug": "mom-guard", "name": "Mom Guard", "short": "Mom", "color": "#7a1f2e", "colorName": "maroon", "dept": "Family", "accessory": "shield"},
+    {"slug": "slides", "name": "Slides", "short": "Slides", "color": "#7b4a26", "colorName": "brown", "dept": "Family", "accessory": "apple"},
+    {"slug": "housey", "name": "Housey", "short": "Housey", "color": "#3a3d42", "colorName": "charcoal", "dept": "Home", "accessory": "hard hat"},
+    {"slug": "vid", "name": "Vid", "short": "Vid", "color": "#e8c52a", "colorName": "yellow", "dept": "Media", "accessory": "camera"},
+    {"slug": "007", "name": "007", "short": "007", "color": "#2f6fe0", "colorName": "blue", "dept": "Media", "accessory": "sunglasses"},
+    {"slug": "mentor", "name": "Mentor", "short": "Mentor", "color": "#7a7a1e", "colorName": "olive", "dept": "Lounge Advisors", "accessory": "mug"}
+  ]
+}
