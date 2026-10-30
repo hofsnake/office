@@ -1,0 +1,33 @@
+// Verify the hosted page: wrong pw rejected, right pw loads live state, a status.sh post appears. Password from env, never printed.
+import { spawn, execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+const [url, out, W, H, DPR] = process.argv.slice(2);
+const port = 9300 + Math.floor(Math.random() * 500);
+const chrome = spawn('/usr/bin/google-chrome', ['--headless=new', '--no-sandbox', '--disable-gpu-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--hide-scrollbars', `--remote-debugging-port=${port}`, `--user-data-dir=/tmp/chrome-live-${port}`, 'about:blank'], { stdio: 'ignore' });
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+let targets; for (let i = 0; i < 60; i++) { try { targets = await (await fetch(`http://127.0.0.1:${port}/json`)).json(); if (targets.length) break; } catch {} await sleep(250); }
+const ws = new WebSocket(targets.find(t => t.type === 'page').webSocketDebuggerUrl); await new Promise(r => ws.onopen = r);
+let id = 0; const pending = new Map(); const logs = [];
+ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } else if (m.method === 'Runtime.exceptionThrown') logs.push('EXC ' + (m.params.exceptionDetails.exception?.description || m.params.exceptionDetails.text)); };
+const send = (method, params = {}) => new Promise(r => { const i = ++id; pending.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
+const ev = async expr => (await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true })).result?.result?.value;
+const shot = async f => { const r = await send('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(f, Buffer.from(r.result.data, 'base64')); console.log('saved', f); };
+await send('Runtime.enable'); await send('Page.enable');
+await send('Emulation.setDeviceMetricsOverride', { width: +W, height: +H, deviceScaleFactor: +DPR, mobile: +W < 600 });
+await send('Page.navigate', { url }); await sleep(5000);
+console.log('login visible at load:', await ev(`getComputedStyle(document.getElementById('login')).display`));
+const submit = pw => ev(`(()=>{const i=document.getElementById('loginpw');i.value=${JSON.stringify(pw)};document.querySelector('#login form').requestSubmit();return 1})()`);
+await submit('definitely-wrong'); await sleep(3500);
+console.log('after wrong pw -> login display:', await ev(`getComputedStyle(document.getElementById('login')).display`), '| msg:', await ev(`document.getElementById('loginmsg').textContent`));
+console.log('stored pw after wrong:', await ev(`sessionStorage.getItem('office-pw')`));
+await submit(process.env.OFFICE_PASSWORD); await sleep(4000);
+console.log('after right pw -> login display:', await ev(`getComputedStyle(document.getElementById('login')).display`), '| stored:', (await ev(`sessionStorage.getItem('office-pw')`)) ? 'yes' : 'no');
+const marker = 'Live check ' + new Date().toLocaleTimeString('en-US', { timeZone: 'America/Chicago' });
+console.log('status.sh ->', execFileSync('./status.sh', ['trader', 'working', marker], { env: process.env }).toString().trim());
+await sleep(7000);
+await ev(`document.getElementById('teambtn').click()`); await sleep(800);
+const panel = await ev(`document.getElementById('panel').innerText`);
+console.log('marker visible in panel:', panel.includes(marker), '| warn:', await ev(`document.getElementById('warn').style.display`));
+await shot(out);
+if (logs.length) console.log('page errors:', logs.slice(0, 5).join(' | '));
+ws.close(); chrome.kill(); await sleep(300);
