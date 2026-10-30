@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bot Office · Underwater Research Station</title>
+<style>:root{--ink:#dcebf3;--dim:#9db8c6;--panel:#081a28d1;--line:#78b4d240}*{box-sizing:border-box}html,body{height:100%;color:var(--ink);-webkit-tap-highlight-color:transparent;background:#0a3350;margin:0;font:13px/1.35 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;overflow:hidden}#app{position:fixed;inset:0}canvas{touch-action:none;width:100%;height:100%;display:block}#tags{pointer-events:none;position:fixed;inset:0;overflow:hidden}.tag{pointer-events:auto;cursor:default;color:#cde1ecb8;white-space:nowrap;will-change:transform;-webkit-user-select:none;user-select:none;background:#06162280;border-radius:3px;padding:2px 4px;font-size:9.5px;line-height:1;position:absolute;top:0;left:0;transform:translate(-50%,-100%)}.tag .full{display:none}.tag:hover,.tag.open{color:#fff;z-index:20;background:#061622eb;padding:5px 8px;font-size:11px}.tag:hover .short,.tag.open .short{display:none}.tag:hover .full,.tag.open .full{display:block}.tag .full b{font-weight:700}.tag .full i{color:var(--dim);margin-top:2px;font-style:normal;display:block}.tag .dot{vertical-align:1px;border-radius:50%;width:5px;height:5px;margin-right:3px;display:inline-block}#hud-top{top:max(10px, env(safe-area-inset-top));pointer-events:none;justify-content:space-between;align-items:flex-start;gap:8px;display:flex;position:fixed;left:10px;right:10px}.chip{pointer-events:auto;background:var(--panel);border:1px solid var(--line);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border-radius:10px;padding:7px 11px}#title b{font-size:14px;display:block}#title span{color:var(--dim);font-size:11px}#usage-chip{text-align:right;font-size:12px}#usage-chip b{font-size:15px}#teambtn{pointer-events:auto;cursor:pointer;color:var(--ink);font:inherit}#panel{background:var(--panel);border:1px solid var(--line);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border-radius:12px;width:310px;max-height:calc(100% - 150px);padding:8px 4px;display:none;position:fixed;top:64px;left:10px;overflow:auto}#panel.show{display:block}#panel h4{letter-spacing:.08em;color:var(--dim);text-transform:uppercase;margin:6px 10px 4px;font-size:11px}.row{cursor:pointer;grid-template-columns:14px 1fr auto;align-items:center;gap:2px 8px;padding:5px 10px;display:grid}.row:hover{background:#78b4d21a}.sw{border:1px solid #ffffff40;border-radius:3px;width:12px;height:12px}.nm{font-weight:600}.nm small{color:var(--dim);margin-left:6px;font-weight:400}.st{color:var(--dim);background:#ffffff14;border-radius:8px;padding:1px 6px;font-size:10.5px}.st.working{color:#d8ffe6;background:#1f6b3a}.st.waiting{color:#fff0c8;background:#7a5a14}.st.error{color:#ffd8d2;background:#7a2a22}.st.done{color:#d8ebff;background:#1f4a7a}.ln{color:var(--dim);grid-column:2/4;min-height:14px;font-size:11.5px}#warn{color:#fff0c8;z-index:30;text-align:center;background:#7a5a14;border:1px solid #c9a23a;border-radius:8px;max-width:92vw;padding:6px 12px;font-size:12px;display:none;position:fixed;top:64px;left:50%;transform:translate(-50%)}#bottom{bottom:max(14px, env(safe-area-inset-bottom));pointer-events:none;flex-direction:column;align-items:center;gap:8px;display:flex;position:fixed;left:0;right:0}#simlabel{pointer-events:none;letter-spacing:.1em;text-transform:uppercase;color:#f3c98a;background:#e8a64a2e;border:1px solid #e8a64a99;border-radius:20px;padding:3px 10px;font-size:11px;display:none}#simbtn{pointer-events:auto;cursor:pointer;color:#e8f4fa;background:#1d5f84;border:1px solid #4aa9d4;border-radius:22px;min-height:42px;padding:10px 20px;font:600 13px inherit}#simbtn.on{background:#7a4f1a;border-color:#e8a64a}@media (width<=640px){#panel{width:auto;max-height:calc(100% - 140px);top:60px;right:10px}#title span{display:none}#usage-chip{font-size:11px}}</style>
+  <script type="module" crossorigin src="./assets/index-CEidj5LF.js"></script>
+</head>
+<body>
+<div id="app"></div><div id="tags"></div>
+<div id="hud-top">
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <div class="chip" id="title"><b>Bot Office</b><span>Underwater research station</span></div>
+    <button class="chip" id="teambtn" aria-expanded="false">Team ▾</button>
+  </div>
+  <div class="chip" id="usage-chip">No usage reading yet</div>
+</div>
+<div id="panel"></div>
+<div id="warn"></div>
+<div id="bottom"><div id="simlabel">Simulation</div><button id="simbtn">Simulate Work</button></div>
+</body>
+</html>
